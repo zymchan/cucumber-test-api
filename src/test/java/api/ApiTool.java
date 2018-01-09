@@ -1,6 +1,8 @@
 package api;
 
 import okhttp3.*;
+import org.apache.log4j.Logger;
+import util.LoggerUtil;
 import util.StringUtil;
 
 import java.io.File;
@@ -12,6 +14,7 @@ import java.util.Set;
 import static java.lang.Class.forName;
 
 public class ApiTool {
+    public static Logger log = LoggerUtil.getLog(ApiTool.class);
 
     final static String CONFIG_PATH="src/test/resources/config.properties";
     final static Properties configs = StringUtil.readPropertiesFile(CONFIG_PATH);
@@ -21,6 +24,7 @@ public class ApiTool {
 
     private String uri ="";
     private RequestBody requestBody;
+    private OkHttpClient client;
 
 
     OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
@@ -28,7 +32,20 @@ public class ApiTool {
     MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
 
-    public void initInterceptor(){
+    public void initOkHttpClient(){
+        initInterceptor();
+        initAuthorization();
+        client = clientBuilder.build();
+    }
+
+    public void clearForNextRequest(){
+        requestBuilder = new Request.Builder();
+        multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        uri ="";
+        requestBody = null;
+    }
+
+    private void initInterceptor(){
         for (String key : configs.stringPropertyNames()) {
             if (key.contains("interceptor")) {
                 String config = configs.getProperty(key);
@@ -53,15 +70,13 @@ public class ApiTool {
         }
     }
 
-    public void initAuthorization(){
+    private void initAuthorization(){
         if(configs.containsKey("Authorization")){
             clientBuilder.authenticator(new Authenticator() {
                 @Override public Request authenticate(Route route, Response response) throws IOException {
                     if (response.request().header("Authorization") != null) {
                         return null; // Give up, we've already attempted to authenticate.
                     }
-//                    System.out.println("Authenticating for response: " + response);
-//                    System.out.println("Challenges: " + response.challenges());
                     String credential = configs.getProperty("Authorization");
                     return response.request().newBuilder()
                             .header("Authorization", credential)
@@ -97,8 +112,10 @@ public class ApiTool {
 
     public void sendGetRequest() throws IOException {
         Request request = requestBuilder.url(uri).get().build();
-        response = clientBuilder.build().newCall(request).execute();
+        response = client.newCall(request).execute();
         responseBody =response.body().string();
+        log.info(responseBody);
+        clearForNextRequest();
     }
 
 
@@ -135,8 +152,10 @@ public class ApiTool {
             requestBody = multipartBuilder.build();
         }
         Request request = requestBuilder.url(uri).post(requestBody).build();
-        response = clientBuilder.build().newCall(request).execute();
+        response = client.newCall(request).execute();
         responseBody =response.body().string();
+        log.info(responseBody);
+        clearForNextRequest();
     }
 
 

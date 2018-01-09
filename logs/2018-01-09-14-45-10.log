@@ -1,0 +1,53 @@
+[2018-01-09 14:45:11] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:18) : ==============Request===========================================================
+[2018-01-09 14:45:11] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:19) : Sending request https://postman-echo.com/get?test1=valueForStore&456=efg on null
+Method: GET
+Content-Type: application/x-www-form-urlencoded
+Connection: keep-alive
+Accept: */*
+
+
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:28) : ==============Response=========================================================
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:29) : Received response for https://postman-echo.com/get?test1=valueForStore&456=efg in 2573.0ms
+Access-Control-Allow-Credentials: 
+Access-Control-Allow-Headers: 
+Access-Control-Allow-Methods: 
+Access-Control-Allow-Origin: 
+Access-Control-Expose-Headers: 
+Content-Type: application/json; charset=utf-8
+Date: Tue, 09 Jan 2018 06:51:55 GMT
+ETag: W/"141-kF1wI0Ldi+kb614ZLSfelg"
+Server: nginx
+set-cookie: sails.sid=s%3AuFNzy8sw25qwmTR4EtXVuEPEdPuaZPSo.lBVhBzy83y2dkiMdZq339WvgMlFYghFJBj7iSQda8KA; Path=/; HttpOnly
+Vary: Accept-Encoding
+Connection: keep-alive
+
+
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:31) : Response-status: 200 / OK
+
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:33) : ===============================================================================
+[2018-01-09 14:45:14] INFO api.ApiTool.sendGetRequest(ApiTool.java:117) : {"args":{"456":"efg","test1":"valueForStore"},"headers":{"host":"postman-echo.com","accept":"*/*","accept-encoding":"gzip","content-type":"application/x-www-form-urlencoded","user-agent":"okhttp/3.9.1","x-forwarded-port":"443","x-forwarded-proto":"https"},"url":"https://postman-echo.com/get?test1=valueForStore&456=efg"}
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:18) : ==============Request===========================================================
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:19) : Sending request https://postman-echo.com/post?storeKey=valueForStore on null
+Method: POST
+
+
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:28) : ==============Response=========================================================
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:29) : Received response for https://postman-echo.com/post?storeKey=valueForStore in 264.0ms
+Access-Control-Allow-Credentials: 
+Access-Control-Allow-Headers: 
+Access-Control-Allow-Methods: 
+Access-Control-Allow-Origin: 
+Access-Control-Expose-Headers: 
+Content-Type: application/json; charset=utf-8
+Date: Tue, 09 Jan 2018 06:51:55 GMT
+ETag: W/"170-trnEekVne8BP2ys8bteIvw"
+Server: nginx
+set-cookie: sails.sid=s%3A0QwYxLmIifbERFcNauZI3MvPoa7QgCkP.ImgWmN70funqyoX4g5W9%2FIZFkcq4XaIJ%2BwSt1NjbCXY; Path=/; HttpOnly
+Vary: X-HTTP-Method-Override, Accept-Encoding
+Connection: keep-alive
+
+
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:31) : Response-status: 200 / OK
+
+[2018-01-09 14:45:14] INFO api.interceptor.LoggingInterceptor.intercept(LoggingInterceptor.java:33) : ===============================================================================
+[2018-01-09 14:45:14] INFO api.ApiTool.sendPostRequest(ApiTool.java:157) : {"args":{"storeKey":"valueForStore"},"data":"valueForStore","files":{},"form":{},"headers":{"host":"postman-echo.com","content-length":"13","accept-encoding":"gzip","content-type":"text/x-markdown; charset=utf-8","user-agent":"okhttp/3.9.1","x-forwarded-port":"443","x-forwarded-proto":"https"},"json":null,"url":"https://postman-echo.com/post?storeKey=valueForStore"}

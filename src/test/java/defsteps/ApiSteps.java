@@ -4,6 +4,7 @@ import api.ApiTool;
 import com.jayway.jsonpath.JsonPath;
 import cucumber.api.DataTable;
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -32,8 +33,7 @@ public class ApiSteps {
 
     @Before
     public void initApiTool(){
-        apiTool.initInterceptor();
-        apiTool.initAuthorization();
+        apiTool.initOkHttpClient();
     }
 
 
@@ -234,4 +234,10 @@ public class ApiSteps {
     }
 
 
+    @And("^store the JSON response \"([^\"]*)\" as \"([^\"]*)\"$")
+    public void storeTheJSONResponseAs(String xpath, String storeKey) throws Throwable {
+        String json = apiTool.responseBody;
+        String storeValue = JsonPath.read(json, expressionToString(xpath));
+        testData.put(storeKey,storeValue);
+    }
 }
