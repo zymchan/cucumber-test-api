@@ -1,23 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('sleep') {
-      parallel {
-        stage('sleep') {
-          steps {
-            sleep 1
-          }
-        }
-        stage('sleep2') {
-          steps {
-            sleep 2
-          }
-        }
+    stage('td1') {
+      steps {
+        build 'TestDemo1'
       }
     }
-    stage('last one sleep') {
+    stage('td2') {
       steps {
-        sleep 3
+        build 'TestDemo2'
       }
     }
   }
